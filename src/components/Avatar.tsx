@@ -7,10 +7,17 @@ type Avatar = {
   uri: string;
   width?: number | undefined;
   height?: number | undefined;
-  borderColor?:string;
+  borderColor?: string;
+  backgroundColor?: string;
 };
 
-export default function Avatar({uri, width, height, borderColor}: Avatar) {
+export default function Avatar({
+  uri,
+  width,
+  height,
+  borderColor,
+  backgroundColor,
+}: Avatar) {
   return (
     <View
       style={{
@@ -18,6 +25,7 @@ export default function Avatar({uri, width, height, borderColor}: Avatar) {
         ...{
           borderColor: borderColor && borderColor,
           borderWidth: 1,
+          backgroundColor: backgroundColor ? backgroundColor : black,
         },
       }}>
       <Image

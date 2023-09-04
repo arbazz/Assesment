@@ -1,12 +1,20 @@
 import React from 'react';
-import Plus from '../assets/Plus';
 import {StyleSheet, View} from 'react-native';
 import {secondaryBlack} from '../utils/theme';
 
-export default function Accordion() {
+type accordion = {
+  icon: JSX.Element;
+  bgColor?: string;
+};
+
+export default function Accordion({icon, bgColor}: accordion) {
   return (
-    <View style={styles.accordion}>
-      <Plus color="white" />
+    <View
+      style={{
+        ...styles.accordion,
+        ...{backgroundColor: bgColor ? bgColor : secondaryBlack},
+      }}>
+      {icon}
     </View>
   );
 }

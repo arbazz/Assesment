@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
+import {black, primary} from '../utils/theme';
+import Home from '../assets/Home';
 
 type TabBarProps = {
   state: BottomTabBarProps['state'];
@@ -15,7 +17,16 @@ type Route = {
 
 const TabBar: React.FC<TabBarProps> = ({state, descriptors, navigation}) => {
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        backgroundColor: 'black',
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        alignSelf: 'center',
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+      }}>
       {state.routes.map((route: Route, index: number) => {
         const {options} = descriptors[route.key];
         const label =
@@ -26,7 +37,7 @@ const TabBar: React.FC<TabBarProps> = ({state, descriptors, navigation}) => {
             : route.name;
 
         const isFocused = state.index === index;
-
+        const Icon = () => <Home color={!isFocused ? 'white' : primary} />;
         const onPress = () => {
           const event = navigation.emit({
             type: 'tabPress',
@@ -55,10 +66,21 @@ const TabBar: React.FC<TabBarProps> = ({state, descriptors, navigation}) => {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{flex: 1}}
+            style={{flex: 1, alignItems: 'center'}}
             key={route.key} // Added key to suppress React warning
           >
-            <Text style={{color: isFocused ? '#673ab7' : '#222'}}>{label}</Text>
+            <Icon />
+            {isFocused && (
+              <View
+                style={{
+                  backgroundColor: primary,
+                  width: 5,
+                  height: 5,
+                  marginTop: 10,
+                  borderRadius: 10,
+                }}
+              />
+            )}
           </TouchableOpacity>
         );
       })}
