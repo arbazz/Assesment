@@ -1,6 +1,6 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
+[2023-09-06 01-33-42.webm](https://github.com/arbazz/Assesment/assets/51861466/24da1816-be6e-49f9-b6b5-a6746faa360e)
 
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
