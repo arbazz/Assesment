@@ -6,9 +6,9 @@ import Plus from '../assets/Plus';
 import Back from '../assets/Back';
 import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 
-export default function Popup() {
+export default function Popup({translate}: any) {
   return (
-    <Animated.View style={styles.popup}>
+    <Animated.View style={[styles.popup, {transform: [{scale: translate}]}]}>
       <View style={styles.row}>
         <Back color="grey" />
         <Text style={styles.text}>Move File</Text>

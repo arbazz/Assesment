@@ -8,22 +8,27 @@ import {
   Pressable,
 } from 'react-native';
 import {black, primary} from '../../utils/theme';
-import {Avatar, Bar, Header} from '../../components';
+import {Avatar, Bar, Header, VideoPlayer} from '../../components';
 import {AvatarData} from '../../utils/data';
 import Plus from '../../assets/Plus';
 import Accordion from '../../components/Accordion';
+import Animated, {useSharedValue, withSpring} from 'react-native-reanimated';
 
 export const Project = () => {
+  const bottom = useSharedValue(0);
+
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
         borderBottomLeftRadius={20}
         borderBottomRightRadius={20}
-        style={styles.imageBackground}
+        style={[styles.imageBackground]}
         source={{uri: AvatarData[1].uri}}>
-        <View style={{padding: 10}}>
+        <Pressable
+          style={{padding: 10}}
+          onPress={() => (bottom.value = withSpring(bottom.value + 200))}>
           <Header backButton={true} />
-        </View>
+        </Pressable>
       </ImageBackground>
       <View style={styles.secondContainer}>
         <Text style={[styles.text, {fontSize: 8}]}>Ads Video Editor</Text>
@@ -95,6 +100,7 @@ export const Project = () => {
           </View>
         </View>
       </View>
+      {/* <VideoPlayer bottom={bottom} /> */}
     </ScrollView>
   );
 };

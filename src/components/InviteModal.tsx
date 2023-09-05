@@ -1,15 +1,17 @@
 import React, {Dispatch, SetStateAction} from 'react';
-import {View, Text, StyleSheet, TextInput, Pressable} from 'react-native';
+import {View, Text, StyleSheet, TextInput, Pressable, RegisteredStyle, ViewStyle} from 'react-native';
 import {black, primary} from '../utils/theme';
+import Animated, { AnimateStyle } from 'react-native-reanimated';
 
 type InviteModal = {
   open?: boolean;
   onChange: Dispatch<SetStateAction<boolean>>;
+  bottom: string;
 };
 
-export default function InviteModal({open, onChange}: InviteModal) {
+export default function InviteModal({open, onChange, bottom}: InviteModal) {
   return (
-    <View style={styles.container}>
+    <Animated.View style={[styles.container, {bottom,}]}>
       <Text style={styles.text}>Invite Collaborators</Text>
       <Text style={[styles.text, {fontSize: 10}]}>
         Lorem Ipsum ismet dolar sit omet
@@ -34,7 +36,7 @@ export default function InviteModal({open, onChange}: InviteModal) {
           <Text style={styles.text}>Add Colloborator</Text>
         </Pressable>
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     height: 200,
     width: '100%',
-    bottom: '20%',
+    bottom: '23%',
     elevation: 10,
     borderRadius: 19,
     paddingVertical: 10,

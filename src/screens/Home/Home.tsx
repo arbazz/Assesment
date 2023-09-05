@@ -12,10 +12,15 @@ import {black, primary} from '../../utils/theme';
 import Accordion from '../../components/Accordion';
 import Search from '../../assets/Search';
 import {tabData} from '../../utils/data';
+import {useSharedValue, withSpring} from 'react-native-reanimated';
+import {useNavigation} from '@react-navigation/native';
 
-export const Home = ({navigation}) => {
+export const Home = () => {
   const [inviteModal, setInviteModal] = useState(false);
   const [time, setTime] = useState(new Date());
+  const navigation = useNavigation();
+  const bottom = useSharedValue('23%');
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       setTime(new Date());
@@ -43,6 +48,7 @@ export const Home = ({navigation}) => {
       <Header
         onPlusPress={() => {
           setInviteModal(true);
+          bottom.value = withSpring('35%');
         }}
       />
       <View
@@ -86,7 +92,7 @@ export const Home = ({navigation}) => {
             );
           })}
       </ScrollView>
-      <Card onPress={()=>navigation.navigate("Project")}/>
+      <Card onPress={() => navigation.navigate('Project')} />
       <FooterHome />
       <View style={styles.center}>
         <View style={[styles.dots, {borderColor: primary, borderWidth: 1}]} />
@@ -94,7 +100,15 @@ export const Home = ({navigation}) => {
         <View style={styles.dots} />
         <View style={styles.dots} />
       </View>
-      {inviteModal && <InviteModal onChange={setInviteModal} />}
+      {inviteModal && (
+        <InviteModal
+          onChange={e => {
+            setInviteModal(e);
+            bottom.value = withSpring('0%');
+          }}
+          bottom={bottom}
+        />
+      )}
       <View style={{height: 40}} />
     </ScrollView>
   );

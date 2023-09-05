@@ -9,6 +9,7 @@ import SearchBar from './SearchBar';
 import ListSection from './ListSection';
 import InviteModal from './InviteModal';
 import Popup from './Popup';
+import VideoPlayer from './VideoPlayer';
 export {
   Header,
   Avatar,
@@ -21,4 +22,5 @@ export {
   ListSection,
   InviteModal,
   Popup,
+  VideoPlayer,
 };
