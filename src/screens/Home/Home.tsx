@@ -1,15 +1,50 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, ScrollView} from 'react-native';
-import {Card, GradientText, Header, SwipeableTab} from '../../components';
-import {black} from '../../utils/theme';
+import {
+  Card,
+  FooterHome,
+  GradientText,
+  Header,
+  InviteModal,
+  SwipeableTab,
+} from '../../components';
+import {black, primary} from '../../utils/theme';
 import Accordion from '../../components/Accordion';
 import Search from '../../assets/Search';
 import {tabData} from '../../utils/data';
 
-export const Home = () => {
+export const Home = ({navigation}) => {
+  const [inviteModal, setInviteModal] = useState(false);
+  const [time, setTime] = useState(new Date());
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+  const daysOfWeek = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
+  const dayOfWeek = daysOfWeek[time.getDay()];
+
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
   return (
-    <View style={styles.container}>
-      <Header />
+    <ScrollView style={styles.container}>
+      <Header
+        onPlusPress={() => {
+          setInviteModal(true);
+        }}
+      />
       <View
         style={{
           flexDirection: 'row',
@@ -22,8 +57,10 @@ export const Home = () => {
             gradient={['#DE9F84', '#C29BBD', '#8484FF', '#9479FF']}
             text="Your recent videos"
           />
-          <Text style={styles.time}>03:24</Text>
-          <Text style={styles.day}>Monday</Text>
+          <Text style={styles.time}>
+            {hours}:{minutes < 10 ? `0${minutes}` : minutes}
+          </Text>
+          <Text style={styles.day}>{dayOfWeek}</Text>
         </View>
         <View style={{marginTop: 50}}>
           <Accordion icon={<Search color="white" />} />
@@ -49,10 +86,17 @@ export const Home = () => {
             );
           })}
       </ScrollView>
-      <View>
-        <Card />
+      <Card onPress={()=>navigation.navigate("Project")}/>
+      <FooterHome />
+      <View style={styles.center}>
+        <View style={[styles.dots, {borderColor: primary, borderWidth: 1}]} />
+        <View style={styles.dots} />
+        <View style={styles.dots} />
+        <View style={styles.dots} />
       </View>
-    </View>
+      {inviteModal && <InviteModal onChange={setInviteModal} />}
+      <View style={{height: 40}} />
+    </ScrollView>
   );
 };
 
@@ -72,5 +116,18 @@ const styles = StyleSheet.create({
     fontSize: 60,
     marginTop: -25,
     color: '#BB62A0',
+  },
+  dots: {
+    backgroundColor: '#2E2E2E',
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    marginRight: 6,
+  },
+  center: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20,
+    flexDirection: 'row',
   },
 });

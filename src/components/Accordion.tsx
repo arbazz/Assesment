@@ -1,21 +1,28 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Pressable} from 'react-native';
 import {secondaryBlack} from '../utils/theme';
 
 type accordion = {
   icon: JSX.Element;
   bgColor?: string;
+  size?: number;
+  onPress?: () => void;
 };
 
-export default function Accordion({icon, bgColor}: accordion) {
+export default function Accordion({icon, bgColor, size, onPress}: accordion) {
   return (
-    <View
+    <Pressable
+      onPress={onPress}
       style={{
         ...styles.accordion,
-        ...{backgroundColor: bgColor ? bgColor : secondaryBlack},
+        ...{
+          backgroundColor: bgColor ? bgColor : secondaryBlack,
+          width: size || 35,
+          height: size || 35,
+        },
       }}>
       {icon}
-    </View>
+    </Pressable>
   );
 }
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import {primary} from '../utils/theme';
 import {AvatarData, ProfilePicLink} from '../utils/data';
 import Avatar from './Avatar';
@@ -9,9 +9,13 @@ import Share from '../assets/Share';
 import Menu from '../assets/Menu';
 import Bar from './Bar';
 
-export default function Card() {
+type Props = {
+  onPress?: () => void;
+};
+
+export default function Card({onPress}: Props) {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <View
         style={{...styles.headerCard, ...{justifyContent: 'space-between'}}}>
         <View style={styles.headerCard}>
@@ -44,10 +48,47 @@ export default function Card() {
           <Text style={styles.titleCard}>First Project</Text>
         </View>
       </View>
-      <View>
-        <Bar />
+      <View style={styles.row}>
+        <View>
+          <Bar label="Sun" barSize={{height: 100}} />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Mon" />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Tue" />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Wed" />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Thu" />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Fri" />
+        </View>
+        <View style={styles.bar}>
+          <Bar label="Sat" />
+        </View>
       </View>
-    </View>
+      <View style={[styles.row, styles.footer]}>
+        <View style={styles.row}>
+          <View style={styles.tpBtn}>
+            <Plus color="white" />
+            <Text style={{color: 'white'}}>2</Text>
+          </View>
+          <View style={[styles.tpBtn, {marginLeft: 10}]}>
+            <Plus color="white" />
+            <Text style={{color: 'white'}}>30 Mar:2023</Text>
+          </View>
+        </View>
+        <View>
+          <Pressable style={styles.pending}>
+            <Text>Pending</Text>
+          </Pressable>
+        </View>
+      </View>
+    </Pressable>
   );
 }
 
@@ -56,6 +97,7 @@ const styles = StyleSheet.create({
     backgroundColor: primary,
     borderRadius: 20,
     padding: 12,
+    marginTop: 20,
   },
   headerCard: {
     flexDirection: 'row',
@@ -69,5 +111,31 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 14,
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  bar: {
+    marginLeft: 20,
+  },
+  tpBtn: {
+    backgroundColor: '#6546B5',
+    flexDirection: 'row',
+    marginTop: 20,
+    borderRadius: 8,
+    paddingVertical: 2,
+    paddingHorizontal: 4,
+    alignItems: 'center',
+  },
+  footer: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pending: {
+    backgroundColor: '#9E76AF',
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    marginTop: 10,
   },
 });

@@ -1,3 +1,5 @@
-import {Home} from "./Home/Home";
+import {Home} from './Home/Home';
+import {Project} from './Project/Project';
+import {Profile} from './Profile/Profile';
 
-export {Home};
+export {Home, Project, Profile};

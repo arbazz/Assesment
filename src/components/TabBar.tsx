@@ -3,6 +3,10 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {BottomTabBarProps} from '@react-navigation/bottom-tabs';
 import {black, primary} from '../utils/theme';
 import Home from '../assets/Home';
+import Search from '../assets/Search';
+import File from '../assets/File';
+import Profile from '../assets/Profile';
+import Setting from '../assets/Setting';
 
 type TabBarProps = {
   state: BottomTabBarProps['state'];
@@ -37,7 +41,18 @@ const TabBar: React.FC<TabBarProps> = ({state, descriptors, navigation}) => {
             : route.name;
 
         const isFocused = state.index === index;
-        const Icon = () => <Home color={!isFocused ? 'white' : primary} />;
+        const Icon = () => {
+          if (route.name === 'Home')
+            return <Home color={!isFocused ? 'white' : primary} />;
+          if (route.name === 'Search')
+            return <Search color={!isFocused ? 'white' : primary} />;
+          if (route.name === 'Project')
+            return <File color={!isFocused ? 'white' : primary} />;
+          if (route.name === 'Profile')
+            return <Profile color={!isFocused ? 'white' : primary} />;
+          if (route.name === 'Setting')
+            return <Setting color={!isFocused ? 'white' : primary} />;
+        };
         const onPress = () => {
           const event = navigation.emit({
             type: 'tabPress',
