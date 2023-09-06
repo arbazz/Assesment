@@ -2,6 +2,10 @@
 # Getting Started
 [2023-09-06 01-33-42.webm](https://github.com/arbazz/Assesment/assets/51861466/24da1816-be6e-49f9-b6b5-a6746faa360e)
 
+
+https://github.com/arbazz/Assesment/assets/51861466/adc6a37c-2675-42e2-8520-d0c0629d605a
+
+
 >**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
 ## Step 1: Start the Metro Server
